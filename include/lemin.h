@@ -40,7 +40,7 @@ typedef struct raw_data {
 typedef struct my_graph {
     void *curr_vertex;
     t_singly_linked_list *adjacent_vertices;
-    int blocked;
+    int weight;
 } t_my_graph;
 
 typedef struct solution {
@@ -72,7 +72,7 @@ int *is_start);
 int save_room(t_raw_data *result, char *line, int *is_end, int *is_start);
 char *cut_given_char_and_everything_before(char *str, char cut);
 char *cut_given_char_and_everything_after(char *str, char cut);
-t_singly_linked_list *create_data_graph_from_input(t_raw_data *input_data);
+t_my_graph * create_data_graph_from_input(t_raw_data *input_data);
 t_solution *get_solution(t_my_graph *data_graph);
 int print_solution(t_solution *solution);
 int is_tunnel(t_raw_data *, char *);

@@ -38,6 +38,8 @@ char *save_next_input_line(int *is_end)
 
     if (getline(&str, &size, stdin) == -1)
         *is_end = 1;
+    if (str[0] == '\n') //Todo: remove this -> only for debug
+        *is_end = 1;
     str = cut_given_char_and_everything_after(str, '\n');
     return (str);
 }

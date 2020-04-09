@@ -31,7 +31,37 @@ graph_list->data)->curr_vertex)->is_start == 1)
     return 0;
 }
 
-t_singly_linked_list *create_data_graph_from_input(t_raw_data *input_data)
+t_singly_linked_list *remove_dead_ends(t_singly_linked_list *graph_list)
+{
+    t_singly_linked_list *graph_list_copy = 0;
+    int end = 0;
+
+    while (!end) {
+        end = 1;
+        graph_list_copy = graph_list;
+        for (; graph_list_copy != 0 && end == 1; graph_list_copy = graph_list_copy->next) {
+            if (((t_my_graph *) graph_list_copy->data)->adjacent_vertices == 1 \
+|| ((t_rooms *) ((t_my_graph *) graph_list_copy->data)->curr_vertex)->is_end \
+== 1 || ((t_rooms *) ((t_my_graph *) \
+graph_list_copy->data)->curr_vertex)->is_start == 0)
+                continue;
+            if (((t_my_graph *) \
+graph_list_copy->data)->adjacent_vertices->next == 0) {
+                ((t_my_graph *) ((t_my_graph *) \
+graph_list_copy->data)->adjacent_vertices->data)->adjacent_vertices = \
+remove_element_by_data_pointer_from_list(((t_my_graph *) ((t_my_graph *) \
+graph_list_copy->data)->adjacent_vertices->data)->adjacent_vertices, \
+graph_list_copy->data);
+                graph_list = \
+remove_element_by_pointer_from_list(graph_list_copy, graph_list);
+                end = 0;
+            }
+        }
+    }
+    return graph_list;
+}
+
+t_my_graph * create_data_graph_from_input(t_raw_data *input_data)
 {
     t_my_graph *graph = 0;
     t_tunnel *tmp_tunnels = (t_tunnel *) input_data->tunnel;
@@ -55,7 +85,8 @@ tmp_vertex_list_copy, tmp_vertex_list_copy_2);
     }
     tmp_vertex_list = tmp_vertex_list_copy;
     remove_self_ref_edges(tmp_vertex_list_copy, tmp_list_adj);
-    return tmp_vertex_list;
+    remove_dead_ends(tmp_vertex_list);
+    return get_start_edge(remove_dead_ends(tmp_vertex_list));
 }
 
 void remove_self_ref_edges(t_singly_linked_list *tmp_vertex_list_copy, \
