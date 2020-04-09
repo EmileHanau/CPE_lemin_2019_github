@@ -7,7 +7,7 @@
 
 #include "../include/lemin.h"
 
-void reduce_graph(t_my_graph *graph, t_singly_linked_list *graph_list)
+void reduce_graph(t_my_graph *graph)
 {
 
 }
