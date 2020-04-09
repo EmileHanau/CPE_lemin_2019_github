@@ -85,8 +85,8 @@ tmp_vertex_list_copy, tmp_vertex_list_copy_2);
     }
     tmp_vertex_list = tmp_vertex_list_copy;
     remove_self_ref_edges(tmp_vertex_list_copy, tmp_list_adj);
-    remove_dead_ends(tmp_vertex_list);
-    return get_start_edge(remove_dead_ends(tmp_vertex_list));
+    //remove_dead_ends(tmp_vertex_list);
+    return get_start_edge((tmp_vertex_list));
 }
 
 void remove_self_ref_edges(t_singly_linked_list *tmp_vertex_list_copy, \
