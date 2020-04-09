@@ -47,6 +47,8 @@ typedef struct solution {
 
 } t_solution;
 
+int vertex_count;
+int count_list(t_singly_linked_list *list);
 t_singly_linked_list *remove_element_by_data_pointer_from_list(t_singly_linked_list \
 *list, void *data_to_remove);
 void delete_vertex_from_graph(t_my_graph *vertex_to_remove, \

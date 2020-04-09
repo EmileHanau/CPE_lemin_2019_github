@@ -7,6 +7,14 @@
 
 #include "../include/lemin.h"
 
+int count_list(t_singly_linked_list *list)
+{
+    int res = 0;
+    for (; list != 0; list = list->next)
+        res++;
+    return res;
+}
+
 t_singly_linked_list *create_empty_singly_linked_list(void)
 {
     t_singly_linked_list *sll = malloc(sizeof(t_singly_linked_list));

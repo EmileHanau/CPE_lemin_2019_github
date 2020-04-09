@@ -40,10 +40,9 @@ t_singly_linked_list *remove_dead_ends(t_singly_linked_list *graph_list)
         end = 1;
         graph_list_copy = graph_list;
         for (; graph_list_copy != 0 && end == 1; graph_list_copy = graph_list_copy->next) {
-            if (((t_my_graph *) graph_list_copy->data)->adjacent_vertices == 1 \
-|| ((t_rooms *) ((t_my_graph *) graph_list_copy->data)->curr_vertex)->is_end \
-== 1 || ((t_rooms *) ((t_my_graph *) \
-graph_list_copy->data)->curr_vertex)->is_start == 0)
+            if (((t_rooms *) ((t_my_graph *) \
+graph_list_copy->data)->curr_vertex)->is_end == 1 || ((t_rooms *) \
+((t_my_graph *) graph_list_copy->data)->curr_vertex)->is_start == 1)
                 continue;
             if (((t_my_graph *) \
 graph_list_copy->data)->adjacent_vertices->next == 0) {
@@ -85,8 +84,9 @@ tmp_vertex_list_copy, tmp_vertex_list_copy_2);
     }
     tmp_vertex_list = tmp_vertex_list_copy;
     remove_self_ref_edges(tmp_vertex_list_copy, tmp_list_adj);
-    //remove_dead_ends(tmp_vertex_list);
-    return get_start_edge((tmp_vertex_list));
+    tmp_vertex_list = remove_dead_ends(tmp_vertex_list);
+    vertex_count = count_list(tmp_vertex_list);
+    return get_start_edge(tmp_vertex_list);
 }
 
 void remove_self_ref_edges(t_singly_linked_list *tmp_vertex_list_copy, \
